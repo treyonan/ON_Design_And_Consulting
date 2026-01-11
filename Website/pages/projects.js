@@ -1,0 +1,248 @@
+// ===================================
+// PROJECTS PAGE (Portfolio)
+// Showcase completed projects
+// URL: yoursite.com/projects
+// ===================================
+
+import { useState } from 'react';
+import Layout from '../components/Layout';
+import styles from '../styles/Projects.module.css';
+
+export default function Projects() {
+  /*
+    STATE MANAGEMENT:
+    - useState is a React Hook (special function)
+    - Stores which filter is currently selected
+    - 'All' means show all projects
+    - Changing this state triggers re-render (page updates)
+  */
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  /*
+    PROJECT DATA:
+    - Array of objects, each representing a project
+    - In production, this could come from a CMS or database
+    - For now, it's hardcoded placeholder data
+
+    TODO: Replace with YOUR actual projects
+  */
+  const projects = [
+    {
+      id: 1,
+      title: 'Automated Assembly Line Redesign',
+      category: 'OEM Design',
+      industry: 'Automotive',
+      description:
+        'Complete redesign of automotive component assembly line, increasing throughput by 35% while reducing downtime.',
+      image: '/projects/project-placeholder-1.jpg', // TODO: Replace with actual images
+      technologies: ['SolidWorks', 'AutoCAD', 'Custom Fixturing'],
+    },
+    {
+      id: 2,
+      title: 'PLC Control System Upgrade',
+      category: 'PLC Programming',
+      industry: 'Food & Beverage',
+      description:
+        'Migration from legacy relay logic to modern Allen-Bradley ControlLogix platform with integrated HMI.',
+      image: '/projects/project-placeholder-2.jpg',
+      technologies: ['Allen-Bradley Logix', 'FactoryTalk View', 'EtherNet/IP'],
+    },
+    {
+      id: 3,
+      title: 'Packaging Line Optimization',
+      category: 'Consulting',
+      industry: 'Packaging',
+      description:
+        'Process analysis and optimization resulting in 25% increase in OEE and significant reduction in material waste.',
+      image: '/projects/project-placeholder-3.jpg',
+      technologies: ['Process Analysis', 'OEE Improvement', 'Training'],
+    },
+    {
+      id: 4,
+      title: 'Custom Material Handling System',
+      category: 'OEM Design',
+      industry: 'Material Handling',
+      description:
+        'Design and fabrication of automated guided vehicle (AGV) system for warehouse material transport.',
+      image: '/projects/project-placeholder-4.jpg',
+      technologies: ['Conveyor Design', 'AGV Integration', 'Safety Systems'],
+    },
+    {
+      id: 5,
+      title: 'SCADA System Implementation',
+      category: 'PLC Programming',
+      industry: 'Pharmaceutical',
+      description:
+        'Enterprise-level SCADA system for multi-site monitoring and data collection with 21 CFR Part 11 compliance.',
+      image: '/projects/project-placeholder-5.jpg',
+      technologies: ['Ignition SCADA', 'SQL Database', 'FDA Compliance'],
+    },
+    {
+      id: 6,
+      title: 'Plant-Wide Equipment Audit',
+      category: 'Consulting',
+      industry: 'Automotive',
+      description:
+        'Comprehensive audit of 50+ production machines with upgrade roadmap and ROI analysis for modernization.',
+      image: '/projects/project-placeholder-6.jpg',
+      technologies: ['Equipment Assessment', 'ROI Analysis', 'Strategic Planning'],
+    },
+  ];
+
+  /*
+    FILTER LOGIC:
+    - Get unique categories from projects
+    - Add 'All' as first option
+    - Creates array: ['All', 'OEM Design', 'PLC Programming', 'Consulting']
+  */
+  const categories = ['All', ...new Set(projects.map((p) => p.category))];
+
+  /*
+    FILTERED PROJECTS:
+    - If activeFilter is 'All', show all projects
+    - Otherwise, only show projects matching the active category
+    - This runs every time activeFilter changes (reactive)
+  */
+  const filteredProjects =
+    activeFilter === 'All'
+      ? projects
+      : projects.filter((project) => project.category === activeFilter);
+
+  return (
+    <Layout title="Projects" description="Explore ON Design LLC's portfolio of successful OEM design, PLC programming, and consulting projects">
+      {/* Page Header */}
+      <section className={styles.pageHeader}>
+        <div className="container">
+          <h1>Our Projects</h1>
+          <p className={styles.headerSubtitle}>
+            Real-world solutions delivered for manufacturing excellence
+          </p>
+        </div>
+      </section>
+
+      {/* Filter Buttons */}
+      <section className={styles.filters}>
+        <div className="container">
+          <div className={styles.filterButtons}>
+            {/*
+              MAP FUNCTION:
+              - Loops through categories array
+              - Creates a button for each category
+              - 'category' is the current item in the loop
+            */}
+            {categories.map((category) => (
+              <button
+                key={category} // Unique key required by React for list items
+                /*
+                  CONDITIONAL CLASSNAME:
+                  - If this button's category matches activeFilter, add 'active' class
+                  - Active class makes button look selected (different color)
+                */
+                className={`${styles.filterButton} ${
+                  activeFilter === category ? styles.active : ''
+                }`}
+                /*
+                  ONCLICK HANDLER:
+                  - When button clicked, update activeFilter state
+                  - This triggers re-render with new filtered projects
+                */
+                onClick={() => setActiveFilter(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Grid */}
+      <section className={styles.projectsSection}>
+        <div className="container">
+          <div className={styles.projectsGrid}>
+            {/*
+              MAPPING PROJECTS TO CARDS:
+              - Loop through filteredProjects array
+              - Create a card for each project
+              - Displays project details from the data
+            */}
+            {filteredProjects.map((project) => (
+              <div key={project.id} className={styles.projectCard}>
+                {/* Project Image */}
+                <div className={styles.projectImage}>
+                  <img src={project.image} alt={project.title} />
+                  <div className={styles.projectCategory}>{project.category}</div>
+                </div>
+
+                {/* Project Content */}
+                <div className={styles.projectContent}>
+                  <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <p className={styles.projectIndustry}>{project.industry}</p>
+                  <p className={styles.projectDescription}>{project.description}</p>
+
+                  {/* Technologies Used */}
+                  <div className={styles.technologies}>
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className={styles.techBadge}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* No Results Message */}
+          {filteredProjects.length === 0 && (
+            <div className={styles.noResults}>
+              <p>No projects found in this category.</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </Layout>
+  );
+}
+
+/*
+  KEY REACT CONCEPTS:
+
+  1. useState HOOK:
+     const [value, setValue] = useState(initialValue)
+     - value: current state
+     - setValue: function to update state
+     - When state changes, component re-renders
+
+  2. ARRAY.MAP():
+     array.map((item) => <Component key={item.id} />)
+     - Loops through array
+     - Returns new array of JSX elements
+     - Requires unique 'key' prop for React optimization
+
+  3. CONDITIONAL RENDERING:
+     {condition && <Element />}
+     - Shows element only if condition is true
+     - Used for "no results" message
+
+  4. FILTER FUNCTION:
+     projects.filter((p) => p.category === activeFilter)
+     - Creates new array with only matching items
+     - Non-destructive (original array unchanged)
+
+  5. TEMPLATE LITERALS:
+     `${className} ${condition ? 'active' : ''}`
+     - Combines strings dynamically
+     - Adds 'active' class conditionally
+
+  CUSTOMIZATION CHECKLIST:
+  [ ] Replace projects array with YOUR projects (line 25)
+  [ ] Add actual project images to /public/projects/
+  [ ] Update project descriptions, industries, technologies
+  [ ] Optionally add more details (date, client, etc.)
+
+  FUTURE ENHANCEMENTS:
+  - Click project card to see full details page
+  - Add project images gallery
+  - Connect to CMS for easier content management
+  - Add search functionality
+*/

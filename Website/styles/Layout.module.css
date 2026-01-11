@@ -1,0 +1,54 @@
+/* ===================================
+   LAYOUT STYLES
+   Controls overall page structure
+   =================================== */
+
+/*
+  PAGE WRAPPER:
+  - Uses Flexbox to create "sticky footer" effect
+  - min-height: 100vh ensures page fills viewport height
+  - flex-direction: column stacks Header, Main, Footer vertically
+*/
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 100% of viewport height */
+}
+
+/*
+  MAIN CONTENT:
+  - flex: 1 makes this section grow to fill available space
+  - Pushes footer to bottom even on short pages
+  - This is the "stretchy middle" between header and footer
+*/
+.mainContent {
+  flex: 1; /* Grows to fill space */
+  width: 100%;
+}
+
+/*
+  HOW STICKY FOOTER WORKS:
+
+  Imagine a page with very little content:
+
+  ┌─────────────────┐
+  │  Header         │ ← Fixed height
+  ├─────────────────┤
+  │                 │
+  │  Main Content   │ ← flex: 1 makes this stretch
+  │  (very short)   │
+  │                 │
+  │                 │
+  ├─────────────────┤
+  │  Footer         │ ← Pushed to bottom
+  └─────────────────┘
+
+  Without flex: 1, footer would appear in the middle of page
+  With flex: 1, main content stretches to push footer down
+
+  This works because:
+  1. pageWrapper has min-height: 100vh (full screen)
+  2. pageWrapper uses flex-direction: column
+  3. mainContent has flex: 1 (takes all available space)
+  4. Header and Footer have natural heights
+*/

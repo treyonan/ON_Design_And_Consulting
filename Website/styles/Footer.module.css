@@ -1,0 +1,141 @@
+/* ===================================
+   FOOTER STYLES
+   CSS Module - scoped to Footer component
+   =================================== */
+
+.footer {
+  background-color: var(--gray-900); /* Dark background */
+  color: var(--gray-100); /* Light text */
+  margin-top: auto; /* Pushes footer to bottom of page */
+  padding: var(--spacing-2xl) 0 var(--spacing-md) 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Three-column grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: var(--spacing-xl); /* Space between columns */
+  margin-bottom: var(--spacing-xl);
+}
+
+.column {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+}
+
+.heading {
+  color: var(--background-white);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.text {
+  color: var(--gray-300);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Quick Links Navigation */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.link {
+  color: var(--gray-300);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+  width: fit-content; /* Only as wide as text */
+}
+
+.link:hover {
+  color: var(--primary-blue-light);
+}
+
+/* Contact Info Section */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* Bottom Copyright Bar */
+.bottom {
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--gray-700); /* Divider line */
+  text-align: center;
+}
+
+.copyright {
+  color: var(--gray-400);
+  font-size: 0.875rem;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   Tablet and Mobile
+   =================================== */
+
+/* Tablet: 2 columns */
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+/* Mobile: Single column (stack vertically) */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr; /* 1 column */
+    gap: var(--spacing-lg);
+  }
+
+  .footer {
+    padding: var(--spacing-xl) 0 var(--spacing-md) 0;
+  }
+
+  .column {
+    text-align: center; /* Center text on mobile */
+  }
+
+  .link {
+    margin: 0 auto; /* Center links on mobile */
+  }
+}
+
+/*
+  KEY CSS CONCEPTS HERE:
+
+  1. CSS GRID:
+     - display: grid makes container a grid
+     - grid-template-columns: repeat(3, 1fr) = 3 equal columns
+     - gap creates space between grid items
+     - Responsive: changes from 3 → 2 → 1 columns on smaller screens
+
+  2. COLOR CONTRAST:
+     - Dark background (--gray-900)
+     - Light text (--gray-100, --gray-300)
+     - Ensures readability
+
+  3. RESPONSIVE BREAKPOINTS:
+     - 968px = tablet threshold
+     - 640px = mobile threshold
+     - Layouts adjust automatically based on screen width
+
+  4. MARGIN-TOP: AUTO:
+     - Pushes footer to bottom of page
+     - Works with flex layout in parent (see Layout.js)
+
+  5. HOVER STATES:
+     - Links change color on hover (better UX)
+     - transition makes color change smooth
+*/

@@ -1,0 +1,227 @@
+/* ===================================
+   ABOUT PAGE STYLES
+   =================================== */
+
+/* Page Header */
+.pageHeader {
+  background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+  color: white;
+  padding: var(--spacing-2xl) 0;
+  text-align: center;
+}
+
+.pageHeader h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.headerSubtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Story Section */
+.story {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-white);
+}
+
+.storyContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.storyContent h2 {
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.storyContent p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+/* Expertise Section */
+.expertise {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-light);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-primary);
+}
+
+.expertiseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+.expertiseItem {
+  background: var(--background-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.expertiseItem h3 {
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.expertiseItem p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+.expertiseList {
+  list-style: none;
+  padding: 0;
+}
+
+.expertiseList li {
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+  color: var(--text-secondary);
+}
+
+/* Custom bullet points */
+.expertiseList li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+/* Values Section */
+.values {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-white);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.valuesGrid .card h3 {
+  color: var(--primary-blue);
+}
+
+/* Industries Section */
+.industries {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-light);
+}
+
+.industriesList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.industry {
+  background: var(--background-white);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.industry:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  color: var(--primary-blue);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet */
+@media (max-width: 968px) {
+  .expertiseGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .industriesList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pageHeader h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .pageHeader {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .pageHeader h1 {
+    font-size: 2rem;
+  }
+
+  .headerSubtitle {
+    font-size: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .industriesList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+  CSS TECHNIQUES USED:
+
+  1. CUSTOM BULLETS:
+     - li::before creates custom bullet (→)
+     - position: absolute places it precisely
+     - Cleaner than default bullets
+
+  2. CARD HOVER EFFECTS:
+     - Industry cards lift on hover (translateY)
+     - Shadow increases for depth
+     - Color changes to primary blue
+
+  3. CONSISTENT SPACING:
+     - All sections use --spacing-2xl for padding
+     - Creates visual rhythm
+     - Easy to adjust globally
+
+  4. RESPONSIVE GRIDS:
+     - 3 columns → 1 column for expertise
+     - 2 columns → 1 column for values
+     - 3 → 2 → 1 columns for industries
+
+  5. READABLE CONTENT:
+     - Story content max-width: 800px
+     - Centers for better readability
+     - Optimal line length for reading
+*/

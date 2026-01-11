@@ -1,0 +1,136 @@
+/* ===================================
+   HEADER STYLES
+   CSS Module - scoped to Header component only
+   =================================== */
+
+.header {
+  background-color: var(--background-white);
+  box-shadow: var(--shadow-sm);
+  position: sticky; /* Stays at top when scrolling */
+  top: 0;
+  z-index: 100; /* Appears above other content */
+  border-bottom: 1px solid var(--border-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Logo left, nav right */
+  align-items: center; /* Vertically center items */
+  height: 80px;
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 50px;
+  width: auto;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logoImage:hover {
+  opacity: 0.8; /* Slight fade on hover */
+}
+
+/* Navigation Menu */
+.nav {
+  display: flex;
+  gap: var(--spacing-lg); /* Space between nav links */
+  align-items: center;
+}
+
+.navLink {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect - changes text color */
+.navLink:hover {
+  color: var(--primary-blue);
+}
+
+/* Underline animation on hover */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-blue);
+  transition: width 0.2s ease;
+}
+
+.navLink:hover::after {
+  width: 100%; /* Underline grows from left to right */
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   Mobile screens (tablets and phones)
+   =================================== */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack vertically */
+    height: auto;
+    padding: var(--spacing-sm);
+  }
+
+  .logo {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .logoImage {
+    height: 40px; /* Smaller logo on mobile */
+  }
+
+  .nav {
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    gap: var(--spacing-sm);
+    justify-content: center;
+  }
+
+  .navLink {
+    font-size: 0.9rem;
+  }
+}
+
+/*
+  HOW CSS MODULES WORK:
+
+  1. SCOPED STYLES:
+     - .header in THIS file only affects this component
+     - Won't accidentally affect other .header classes elsewhere
+     - Next.js automatically generates unique class names
+
+  2. IMPORTING:
+     - In Header.js: import styles from './Header.module.css'
+     - Use with: className={styles.header}
+     - Becomes: class="Header_header__abc123" (unique name)
+
+  3. CSS VARIABLES:
+     - var(--primary-blue) comes from globals.css
+     - Ensures consistent colors across the site
+     - Change once in globals.css, updates everywhere
+
+  4. FLEXBOX:
+     - display: flex makes container flexible
+     - justify-content: space-between pushes items to edges
+     - gap creates space between items
+
+  5. RESPONSIVE:
+     - @media (max-width: 768px) = tablet/mobile screens
+     - Changes layout from horizontal to vertical
+     - Adjusts sizes for smaller screens
+*/

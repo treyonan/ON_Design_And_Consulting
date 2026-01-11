@@ -1,0 +1,247 @@
+/* ===================================
+   CONTACT PAGE STYLES
+   =================================== */
+
+/* Page Header */
+.pageHeader {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+  color: white;
+  padding: var(--spacing-2xl) 0;
+  text-align: center;
+}
+
+.pageHeader h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.headerSubtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Contact Section */
+.contactSection {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-light);
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Left smaller, right larger */
+  gap: var(--spacing-2xl);
+}
+
+/* Contact Info Column */
+.contactInfo {
+  padding: var(--spacing-lg);
+}
+
+.contactInfo h2 {
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-md);
+}
+
+.contactDescription {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.contactItem {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.contactIcon {
+  font-size: 2rem;
+  min-width: 50px;
+}
+
+.contactItem h3 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.contactItem p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Form Container */
+.formContainer {
+  background: var(--background-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Form Groups */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.95rem;
+}
+
+/* Input Fields */
+.input,
+.textarea {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit; /* Use same font as rest of site */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--background-white);
+}
+
+/* Focus state (when user clicks in field) */
+.input:focus,
+.textarea:focus {
+  outline: none; /* Remove default browser outline */
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Subtle blue glow */
+}
+
+/* Placeholder text */
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--gray-400);
+}
+
+/* Textarea specific */
+.textarea {
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 120px;
+}
+
+/* Success Message */
+.successMessage {
+  background-color: #d1fae5; /* Light green */
+  color: #065f46; /* Dark green */
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent-green);
+  margin-top: var(--spacing-md);
+}
+
+/* Error Message */
+.errorMessage {
+  background-color: #fee2e2; /* Light red */
+  color: #991b1b; /* Dark red */
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid #dc2626; /* Red */
+  margin-top: var(--spacing-md);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet */
+@media (max-width: 968px) {
+  .contactGrid {
+    grid-template-columns: 1fr; /* Stack vertically */
+  }
+
+  .pageHeader h1 {
+    font-size: 2.5rem;
+  }
+
+  .formContainer {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .pageHeader {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .pageHeader h1 {
+    font-size: 2rem;
+  }
+
+  .headerSubtitle {
+    font-size: 1rem;
+  }
+
+  .contactInfo {
+    padding: var(--spacing-md);
+  }
+
+  .formContainer {
+    padding: var(--spacing-md);
+  }
+
+  .input,
+  .textarea {
+    font-size: 16px; /* Prevents zoom on iOS when focusing inputs */
+  }
+}
+
+/*
+  FORM STYLING PRINCIPLES:
+
+  1. CLEAR VISUAL FEEDBACK:
+     - Border color changes on focus (blue)
+     - Subtle shadow appears (blue glow)
+     - Shows user which field is active
+
+  2. ACCESSIBILITY:
+     - Labels properly associated with inputs (htmlFor)
+     - Required fields marked with *
+     - Focus states clearly visible
+     - Good color contrast
+
+  3. MOBILE-FRIENDLY:
+     - Font size 16px on mobile (prevents iOS zoom)
+     - Adequate padding for touch targets
+     - Vertical stacking on small screens
+
+  4. CONSISTENT SPACING:
+     - gap property for form groups
+     - Padding matches site spacing system
+     - Visual rhythm throughout
+
+  5. VALIDATION FEEDBACK:
+     - Success message: green background, green border
+     - Error message: red background, red border
+     - Clear visual distinction
+
+  6. LAYOUT:
+     - Two-column grid on desktop (info left, form right)
+     - Form gets more space (1fr vs 1.5fr)
+     - Single column on mobile
+
+  7. INPUT STATES:
+     - Default: Gray border
+     - Focus: Blue border + glow
+     - Transition: Smooth color changes
+     - Placeholder: Light gray text
+*/

@@ -1,0 +1,267 @@
+/* ===================================
+   SERVICES PAGE STYLES
+   =================================== */
+
+/* Page Header */
+.pageHeader {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+  color: white;
+  padding: var(--spacing-2xl) 0;
+  text-align: center;
+}
+
+.pageHeader h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.headerSubtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Main Services Section */
+.mainServices {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-light);
+}
+
+.serviceBlock {
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.serviceContent {
+  max-width: 900px;
+}
+
+.serviceIcon {
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.serviceBlock h2 {
+  color: var(--primary-blue);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.serviceDescription {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.subheading {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.deliverablesList,
+.platformsList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.deliverablesList li,
+.platformsList li {
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-lg);
+  position: relative;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Custom checkmark bullets */
+.deliverablesList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Custom arrow bullets for platforms */
+.platformsList li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+/* Process Section */
+.process {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-white);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-primary);
+}
+
+.processSteps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.step {
+  text-align: center;
+  padding: var(--spacing-lg);
+  position: relative;
+}
+
+.stepNumber {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 auto var(--spacing-md) auto;
+  box-shadow: var(--shadow-md);
+}
+
+.step h3 {
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.step p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* CTA Section */
+.cta {
+  background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+  padding: var(--spacing-2xl) 0;
+  color: white;
+}
+
+.ctaContent {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ctaContent h2 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: var(--spacing-md);
+}
+
+.ctaContent p {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet */
+@media (max-width: 968px) {
+  .processSteps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pageHeader h1 {
+    font-size: 2.5rem;
+  }
+
+  .serviceBlock {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .pageHeader {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .pageHeader h1 {
+    font-size: 2rem;
+  }
+
+  .headerSubtitle {
+    font-size: 1rem;
+  }
+
+  .serviceBlock {
+    padding: var(--spacing-md);
+  }
+
+  .serviceBlock h2 {
+    font-size: 1.5rem;
+  }
+
+  .serviceIcon {
+    font-size: 2.5rem;
+  }
+
+  .processSteps {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .ctaContent h2 {
+    font-size: 2rem;
+  }
+}
+
+/*
+  DESIGN NOTES:
+
+  1. SERVICE BLOCKS:
+     - White cards with shadow for depth
+     - Generous padding for readability
+     - Max-width prevents overly long lines
+
+  2. CUSTOM BULLETS:
+     - ✓ (checkmark) for deliverables = completion/success
+     - ▸ (arrow) for platforms = options/choices
+     - Color coding: green for deliverables, blue for platforms
+
+  3. PROCESS STEPS:
+     - Circular numbered badges
+     - Grid layout: 4 → 2 → 1 columns (responsive)
+     - Equal spacing between steps
+
+  4. VISUAL HIERARCHY:
+     - Service titles in primary blue
+     - Subheadings in darker gray
+     - Body text in secondary gray
+     - Creates clear scanning pattern
+
+  5. SPACING:
+     - Consistent margins between sections
+     - Service blocks separated with xl spacing
+     - Breathing room for easier reading
+*/

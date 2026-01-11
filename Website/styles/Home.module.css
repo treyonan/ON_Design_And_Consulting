@@ -1,0 +1,247 @@
+/* ===================================
+   HOME PAGE STYLES
+   CSS Module scoped to Home page
+   =================================== */
+
+/* ===================================
+   HERO SECTION
+   Large banner at top of page
+   =================================== */
+.hero {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+  color: white;
+  padding: var(--spacing-2xl) 0;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.heroContent {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: white; /* Override default */
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xl);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.heroButtons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap; /* Allows buttons to wrap on small screens */
+}
+
+/* ===================================
+   SERVICES SECTION
+   Grid of service cards
+   =================================== */
+.services {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-light);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.serviceIcon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.serviceLink {
+  color: var(--primary-blue);
+  font-weight: 600;
+  margin-top: var(--spacing-sm);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.serviceLink:hover {
+  transform: translateX(4px); /* Arrow moves right on hover */
+}
+
+/* ===================================
+   WHY CHOOSE US SECTION
+   Benefits grid
+   =================================== */
+.whyChoose {
+  padding: var(--spacing-2xl) 0;
+  background-color: var(--background-white);
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+.benefit {
+  padding: var(--spacing-lg);
+}
+
+.benefit h3 {
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-sm);
+}
+
+.benefit p {
+  color: var(--text-secondary);
+}
+
+/* ===================================
+   CALL TO ACTION SECTION
+   Encourages user to contact
+   =================================== */
+.cta {
+  background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+  padding: var(--spacing-2xl) 0;
+  color: white;
+}
+
+.ctaContent {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: var(--spacing-md);
+}
+
+.ctaText {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   Mobile and Tablet adjustments
+   =================================== */
+
+/* Tablet */
+@media (max-width: 968px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+    padding: var(--spacing-xl) 0;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .heroButtons {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+  }
+
+  .heroButtons .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: var(--spacing-md);
+  }
+
+  .benefitsGrid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: var(--spacing-md);
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+}
+
+/*
+  KEY CSS CONCEPTS:
+
+  1. LINEAR GRADIENT:
+     background: linear-gradient(135deg, color1, color2)
+     - Creates smooth color transition
+     - 135deg = diagonal direction
+     - Professional look for hero sections
+
+  2. GRID LAYOUTS:
+     - Services: 3 columns → 2 columns → 1 column (responsive)
+     - Benefits: 2 columns → 1 column (responsive)
+     - Automatically adjusts based on screen size
+
+  3. FLEXBOX:
+     - Hero buttons use flex for centering
+     - flex-wrap allows wrapping on small screens
+     - justify-content: center aligns items
+
+  4. SPACING CONSISTENCY:
+     - All spacing uses CSS variables (--spacing-md, etc.)
+     - Ensures consistent rhythm throughout page
+     - Easy to adjust globally
+
+  5. RESPONSIVE STRATEGY:
+     - Desktop first (base styles)
+     - @media queries for smaller screens
+     - Grid columns reduce on smaller screens
+     - Font sizes shrink proportionally
+
+  6. HOVER EFFECTS:
+     - Service links translate (move) on hover
+     - Buttons change color/shadow (from globals.css)
+     - Creates interactive, polished feel
+*/
