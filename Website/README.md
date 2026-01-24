@@ -6,6 +6,7 @@ A modern, responsive website for ON Design LLC - showcasing OEM equipment design
 
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
+- [Content Management](#content-management)
 - [Getting Started](#getting-started)
 - [Development](#development)
 - [Customization Guide](#customization-guide)
@@ -35,7 +36,7 @@ A modern, responsive website for ON Design LLC - showcasing OEM equipment design
 ## 📁 Project Structure
 
 ```
-ON_Design_Website/
+Website/
 ├── components/              # Reusable React components
 │   ├── Header.js           # Site header with logo and navigation
 │   ├── Footer.js           # Site footer with links and contact info
@@ -60,12 +61,26 @@ ON_Design_Website/
 │   ├── Projects.module.css # Projects page styles
 │   └── Contact.module.css  # Contact page styles
 │
-├── public/                  # Static files (images, fonts, etc.)
-│   ├── logo-placeholder.svg # Placeholder logo (REPLACE WITH YOURS)
+├── public/                  # Static files served directly
+│   ├── logo.jpg            # Company logo
 │   ├── favicon.ico         # Browser tab icon
-│   └── projects/           # Project images folder
-│       ├── project-placeholder-1.jpg
-│       ├── project-placeholder-2.jpg
+│   └── projects/           # Project images (organized by project)
+│       ├── hydro-static-tester/
+│       │   ├── Main.jpg
+│       │   └── [detail images]
+│       └── thrust-chamber-test-bench/
+│           ├── Main.jpg
+│           └── [detail images]
+│
+├── Content/                 # Source content for the website (see Content Management)
+│   ├── Company Logo/       # Company logo source file
+│   └── Projects/           # Project content organized by client
+│       ├── [Client Name]/
+│       │   └── [Project Name]/
+│       │       ├── Project Details.txt
+│       │       └── Pictures/
+│       │           ├── Main.jpg
+│       │           └── [additional images]
 │       └── ...
 │
 ├── package.json             # Project dependencies and scripts
@@ -91,7 +106,82 @@ No need to configure routes manually!
 
 ---
 
-## 🚀 Getting Started
+## Content Management
+
+All website content is managed through the `Content/` directory. This serves as the single source of truth for project data, images, and descriptions.
+
+### Adding a New Project
+
+#### Step 1: Create the content directory
+
+```
+Content/Projects/[Client Name]/[Project Name]/
+├── Project Details.txt    # Project description and metadata
+└── Pictures/
+    ├── Main.jpg           # Main image (used as project card thumbnail)
+    └── [other images]     # Detail images (shown in modal gallery)
+```
+
+#### Step 2: Fill in Project Details.txt
+
+This file provides the text content for the project. Sections can be added over time:
+
+```
+Project: [Project Title]
+
+Summary:
+
+[Brief description of the project - used for the project card]
+```
+
+Additional sections can be added as needed (e.g., Technical Details, Challenges, Results).
+
+#### Step 3: Add images to the Pictures directory
+
+- **Main.jpg** (required) - The primary image displayed on the project card. This should be a clear, representative view of the project.
+- **[Other images]** (optional) - Any additional images will be displayed in the detail gallery when "View Details" is clicked. Name them descriptively (e.g., `HMI_001.jpg`, `Control_Panel_001.jpg`, `Fixture_001.jpg`).
+
+#### Step 4: Wire it up in code
+
+Images from the `Content/` directory get copied to `public/projects/[project-slug]/` and the project entry gets added to the `projects` array in `pages/projects.js`.
+
+### Project Data Structure
+
+Each project in `pages/projects.js` follows this format:
+
+```javascript
+{
+  id: [number],
+  title: '[Project Title]',
+  category: '[OEM Design | PLC Programming | Consulting]',
+  industry: '[Industry Name]',
+  description: '[Summary from Project Details.txt]',
+  image: '/projects/[project-slug]/Main.jpg',
+  technologies: ['Tech 1', 'Tech 2', 'Tech 3'],
+  detailImages: [
+    { src: '/projects/[project-slug]/[image].jpg', label: '[Description]' },
+  ],
+}
+```
+
+### Current Projects
+
+| Project | Client | Category | Status |
+|---------|--------|----------|--------|
+| Hydro-Static Tester | Emerson | OEM Design | Active |
+| Thrust Chamber Test Bench | GE Oil and Gas | OEM Design | Active |
+
+### Content Conventions
+
+- **Main image**: Always named `Main.jpg` in the Pictures directory
+- **Project Details**: Always a file called `Project Details.txt` in the project root
+- **Directory naming**: Use the client name as the parent folder, project name as the subfolder
+- **Image formats**: JPG/JPEG preferred for photos and renders
+- **Categories**: `OEM Design`, `PLC Programming`, or `Consulting`
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
@@ -109,7 +199,7 @@ If not installed, download from: https://nodejs.org/
 1. **Open your terminal** and navigate to the project folder:
 
 ```bash
-cd C:\Dolese\ON_Design_Website
+cd C:\ON_Design_And_Consulting\Website
 ```
 
 2. **Install dependencies** (this downloads all required packages):
@@ -238,25 +328,32 @@ See [CUSTOMIZATION.md](./CUSTOMIZATION.md) for detailed step-by-step customizati
 
 ### Quick Customization Checklist
 
-**High Priority (Do First):**
+**Completed:**
 
-- [ ] Replace logo: Add your logo as `/public/logo.svg`
+- [x] Add company logo (`public/logo.jpg`)
+- [x] Add first project: Hydro-Static Tester (Emerson)
+- [x] Add second project: Thrust Chamber Test Bench (GE Oil and Gas)
+
+**High Priority (Do Next):**
+
 - [ ] Update contact info in Footer.js and Contact page
 - [ ] Replace company story in About page
 - [ ] Update service descriptions in Services page
-- [ ] Add your actual projects in Projects page
+- [ ] Add more projects (follow Content Management structure above)
+- [ ] Replace remaining placeholder projects
 
 **Medium Priority:**
 
-- [ ] Replace project images in `/public/projects/`
 - [ ] Adjust color scheme if needed (in `styles/globals.css`)
 - [ ] Update page meta descriptions for SEO
+- [ ] Convert logo to SVG format
 
 **Low Priority (Polish):**
 
 - [ ] Add favicon
 - [ ] Fine-tune spacing/layout
 - [ ] Add social media links
+- [ ] Add email integration to contact form
 
 ---
 
@@ -358,18 +455,15 @@ Edit `styles/globals.css` to change the color scheme:
 
 All blue elements will update automatically!
 
-### Add Your Logo
+### Logo
 
-1. Save your logo as SVG: `/public/logo.svg`
-2. Update `components/Header.js`:
+The company logo is stored at `Content/Company Logo/` and served from `public/logo.jpg`. To update the logo:
 
-```javascript
-<img
-  src="/logo.svg"  // Change from /logo-placeholder.svg
-  alt="ON Design LLC Logo"
-  className={styles.logoImage}
-/>
-```
+1. Place the new logo file in `Content/Company Logo/`
+2. Copy it to `public/logo.jpg` (or `public/logo.svg` if using SVG format)
+3. Update the `src` in `components/Header.js` if the filename changes
+
+Note: SVG format is recommended for logos (scales without quality loss, supports transparency). The current logo is JPG.
 
 ---
 

@@ -27,7 +27,7 @@ export default function Projects() {
       industry: 'Manufacturing',
       description:
         'Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.',
-      image: '/projects/hydro-static-tester/Machine_001.jpg',
+      image: '/projects/hydro-static-tester/Main.jpg',
       technologies: ['UR Cobot', 'Hydro-Static Testing', 'PLC Controls'],
       detailImages: [
         { src: '/projects/hydro-static-tester/Control_Panel_001.jpg', label: 'Control Panel' },
