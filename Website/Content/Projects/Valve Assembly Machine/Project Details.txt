@@ -1,0 +1,18 @@
+Project title: Valve Assembly Machine
+
+Type: OEM Design
+
+Sector: Manufacturing
+
+Sub-Sector: Oil & Gas
+
+Summary:
+
+Semi-automated machine to assemble flanged ball valves
+- Automated seat installation
+- Automated pick and placement of tail and body sections
+- Two hole alignment check
+- Automated torqueing
+- Automated stenciling
+
+

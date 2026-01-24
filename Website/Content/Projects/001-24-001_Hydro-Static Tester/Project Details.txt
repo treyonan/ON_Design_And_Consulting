@@ -1,0 +1,11 @@
+Project title: Hydro-Static Tester
+
+Type: OEM Design
+
+Sector: Manufacturing
+
+Sub-Sector: 
+
+Summary:
+
+Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.

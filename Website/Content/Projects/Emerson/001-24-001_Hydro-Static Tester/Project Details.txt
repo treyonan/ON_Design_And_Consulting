@@ -1,5 +1,0 @@
-Project: Hydro-Static Tester
-
-Summary:
-
-Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.

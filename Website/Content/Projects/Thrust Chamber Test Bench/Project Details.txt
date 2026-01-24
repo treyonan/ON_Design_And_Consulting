@@ -1,0 +1,12 @@
+Project title: Thrust Chamber Test Bench
+
+Type: OEM Design
+
+Sector: Manufacturing
+
+Sub-Sector: Oil & Gas
+
+Summary:
+
+Automated test bench for testing high capacity thrust chambers for horizontal pump systems.
+

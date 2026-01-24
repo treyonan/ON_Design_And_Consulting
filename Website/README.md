@@ -68,19 +68,23 @@ Website/
 │       ├── hydro-static-tester/
 │       │   ├── Main.jpg
 │       │   └── [detail images]
-│       └── thrust-chamber-test-bench/
+│       ├── thrust-chamber-test-bench/
+│       │   ├── Main.jpg
+│       │   └── [detail images]
+│       └── valve-assembly-machine/
 │           ├── Main.jpg
-│           └── [detail images]
+│           └── [detail videos]
 │
 ├── Content/                 # Source content for the website (see Content Management)
 │   ├── Company Logo/       # Company logo source file
-│   └── Projects/           # Project content organized by client
-│       ├── [Client Name]/
-│       │   └── [Project Name]/
-│       │       ├── Project Details.txt
-│       │       └── Pictures/
-│       │           ├── Main.jpg
-│       │           └── [additional images]
+│   └── Projects/           # Project content (flat structure)
+│       ├── [Project Name]/
+│       │   ├── Project Details.txt
+│       │   ├── Pictures/
+│       │   │   ├── Main.jpg
+│       │   │   └── [additional images]
+│       │   └── Videos/        # Optional
+│       │       └── [video files]
 │       └── ...
 │
 ├── package.json             # Project dependencies and scripts
@@ -115,26 +119,39 @@ All website content is managed through the `Content/` directory. This serves as 
 #### Step 1: Create the content directory
 
 ```
-Content/Projects/[Client Name]/[Project Name]/
+Content/Projects/[Project Name]/
 ├── Project Details.txt    # Project description and metadata
-└── Pictures/
-    ├── Main.jpg           # Main image (used as project card thumbnail)
-    └── [other images]     # Detail images (shown in modal gallery)
+├── Pictures/
+│   ├── Main.jpg           # Main image (used as project card thumbnail)
+│   └── [other images]     # Detail images (shown in modal gallery)
+└── Videos/                # Optional - detail videos (shown in modal gallery)
+    └── [video files]
 ```
+
+Folder names can optionally include a job number prefix for internal tracking (e.g., `001-24-001_Hydro-Static Tester`). The display title comes from `Project Details.txt`, not the folder name.
 
 #### Step 2: Fill in Project Details.txt
 
-This file provides the text content for the project. Sections can be added over time:
+This file provides the text content for the project:
 
 ```
-Project: [Project Title]
+Project title: [Display name on website]
+
+Type: [OEM Design | PLC Programming | Consulting]
+
+Sector: [Broad industry - e.g., Manufacturing]
+
+Sub-Sector: [Specific niche - e.g., Oil & Gas, Automotive, Pharmaceutical]
 
 Summary:
 
 [Brief description of the project - used for the project card]
 ```
 
-Additional sections can be added as needed (e.g., Technical Details, Challenges, Results).
+- **Type** maps to the project category (used for filtering)
+- **Sector** is the broad industry classification
+- **Sub-Sector** is optional; provides more specific classification. Displayed on the project card when available, otherwise Sector is shown.
+- Additional sections can be added as needed (e.g., Technical Details, Challenges, Results).
 
 #### Step 3: Add images to the Pictures directory
 
@@ -152,32 +169,38 @@ Each project in `pages/projects.js` follows this format:
 ```javascript
 {
   id: [number],
-  title: '[Project Title]',
-  category: '[OEM Design | PLC Programming | Consulting]',
-  industry: '[Industry Name]',
+  title: '[Project title from Project Details.txt]',
+  category: '[Type from Project Details.txt]',
+  sector: '[Sector from Project Details.txt]',
+  subSector: '[Sub-Sector from Project Details.txt]',  // empty string if not applicable
   description: '[Summary from Project Details.txt]',
   image: '/projects/[project-slug]/Main.jpg',
   technologies: ['Tech 1', 'Tech 2', 'Tech 3'],
   detailImages: [
     { src: '/projects/[project-slug]/[image].jpg', label: '[Description]' },
+    { src: '/projects/[project-slug]/[video].mov', label: '[Description]', type: 'video' },
   ],
 }
 ```
 
 ### Current Projects
 
-| Project | Client | Category | Status |
-|---------|--------|----------|--------|
-| Hydro-Static Tester | Emerson | OEM Design | Active |
-| Thrust Chamber Test Bench | GE Oil and Gas | OEM Design | Active |
+| Project | Category | Sector | Sub-Sector | Status |
+|---------|----------|--------|------------|--------|
+| Hydro-Static Tester | OEM Design | Manufacturing | - | Active |
+| Thrust Chamber Test Bench | OEM Design | Manufacturing | Oil & Gas | Active |
+| Valve Assembly Machine | OEM Design | Manufacturing | Oil & Gas | Active |
 
 ### Content Conventions
 
+- **Directory structure**: Projects live directly under `Content/Projects/[Project Name]/` (flat, no client grouping)
+- **Folder naming**: Can optionally include a job number prefix (e.g., `001-24-001_Project Name`). Display title comes from `Project Details.txt`
 - **Main image**: Always named `Main.jpg` in the Pictures directory
-- **Project Details**: Always a file called `Project Details.txt` in the project root
-- **Directory naming**: Use the client name as the parent folder, project name as the subfolder
+- **Project Details**: Always a file called `Project Details.txt` in the project root, with standardized fields (Project title, Type, Sector, Sub-Sector, Summary)
 - **Image formats**: JPG/JPEG preferred for photos and renders
-- **Categories**: `OEM Design`, `PLC Programming`, or `Consulting`
+- **Video files**: Place in a `Videos/` directory within the project folder. Add to detailImages with `type: 'video'`
+- **Categories (Type)**: `OEM Design`, `PLC Programming`, or `Consulting`
+- **Sector/Sub-Sector**: Sector is the broad industry (e.g., Manufacturing). Sub-Sector is optional and more specific (e.g., Oil & Gas, Automotive)
 
 ---
 
@@ -333,6 +356,7 @@ See [CUSTOMIZATION.md](./CUSTOMIZATION.md) for detailed step-by-step customizati
 - [x] Add company logo (`public/logo.jpg`)
 - [x] Add first project: Hydro-Static Tester (Emerson)
 - [x] Add second project: Thrust Chamber Test Bench (GE Oil and Gas)
+- [x] Add third project: Valve Assembly Machine (SLB)
 
 **High Priority (Do Next):**
 

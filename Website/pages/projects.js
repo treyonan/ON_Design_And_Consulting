@@ -24,7 +24,8 @@ export default function Projects() {
       id: 1,
       title: 'Hydro-Static Tester',
       category: 'OEM Design',
-      industry: 'Manufacturing',
+      sector: 'Manufacturing',
+      subSector: '',
       description:
         'Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.',
       image: '/projects/hydro-static-tester/Main.jpg',
@@ -42,7 +43,8 @@ export default function Projects() {
       id: 2,
       title: 'Thrust Chamber Test Bench',
       category: 'OEM Design',
-      industry: 'Oil & Gas',
+      sector: 'Manufacturing',
+      subSector: 'Oil & Gas',
       description:
         'Automated test bench for testing high capacity thrust chambers for horizontal pump systems.',
       image: '/projects/thrust-chamber-test-bench/Main.jpg',
@@ -55,39 +57,57 @@ export default function Projects() {
     },
     {
       id: 3,
+      title: 'Valve Assembly Machine',
+      category: 'OEM Design',
+      sector: 'Manufacturing',
+      subSector: 'Oil & Gas',
+      description:
+        'Semi-automated machine to assemble flanged ball valves. Features automated seat installation, pick and placement of tail and body sections, two hole alignment check, automated torqueing, and automated stenciling.',
+      image: '/projects/valve-assembly-machine/Main.jpg',
+      technologies: ['Automated Assembly', 'Torque Systems', 'Pick & Place'],
+      detailImages: [
+        { src: '/projects/valve-assembly-machine/Torque_001.mov', label: 'Automated Torqueing', type: 'video' },
+      ],
+    },
+    {
+      id: 4,
       title: 'Packaging Line Optimization',
       category: 'Consulting',
-      industry: 'Packaging',
+      sector: 'Manufacturing',
+      subSector: 'Packaging',
       description:
         'Process analysis and optimization resulting in 25% increase in OEE and significant reduction in material waste.',
       image: '/projects/project-placeholder-3.jpg',
       technologies: ['Process Analysis', 'OEE Improvement', 'Training'],
     },
     {
-      id: 4,
+      id: 5,
       title: 'Custom Material Handling System',
       category: 'OEM Design',
-      industry: 'Material Handling',
+      sector: 'Manufacturing',
+      subSector: 'Material Handling',
       description:
         'Design and fabrication of automated guided vehicle (AGV) system for warehouse material transport.',
       image: '/projects/project-placeholder-4.jpg',
       technologies: ['Conveyor Design', 'AGV Integration', 'Safety Systems'],
     },
     {
-      id: 5,
+      id: 6,
       title: 'SCADA System Implementation',
       category: 'PLC Programming',
-      industry: 'Pharmaceutical',
+      sector: 'Manufacturing',
+      subSector: 'Pharmaceutical',
       description:
         'Enterprise-level SCADA system for multi-site monitoring and data collection with 21 CFR Part 11 compliance.',
       image: '/projects/project-placeholder-5.jpg',
       technologies: ['Ignition SCADA', 'SQL Database', 'FDA Compliance'],
     },
     {
-      id: 6,
+      id: 7,
       title: 'Plant-Wide Equipment Audit',
       category: 'Consulting',
-      industry: 'Automotive',
+      sector: 'Manufacturing',
+      subSector: 'Automotive',
       description:
         'Comprehensive audit of 50+ production machines with upgrade roadmap and ROI analysis for modernization.',
       image: '/projects/project-placeholder-6.jpg',
@@ -182,7 +202,9 @@ export default function Projects() {
                 <div className={styles.projectContent}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>
                   <span className={styles.projectCategory}>{project.category}</span>
-                  <p className={styles.projectIndustry}>{project.industry}</p>
+                  <p className={styles.projectIndustry}>
+                    {project.subSector || project.sector}
+                  </p>
                   <p className={styles.projectDescription}>{project.description}</p>
 
                   {/* Technologies Used */}
@@ -229,7 +251,13 @@ export default function Projects() {
             <div className={styles.modalGallery}>
               {selectedProject.detailImages.map((img, index) => (
                 <div key={index} className={styles.galleryItem}>
-                  <img src={img.src} alt={img.label} />
+                  {img.type === 'video' ? (
+                    <video controls className={styles.galleryVideo}>
+                      <source src={img.src} />
+                    </video>
+                  ) : (
+                    <img src={img.src} alt={img.label} />
+                  )}
                   <span className={styles.galleryLabel}>{img.label}</span>
                 </div>
               ))}

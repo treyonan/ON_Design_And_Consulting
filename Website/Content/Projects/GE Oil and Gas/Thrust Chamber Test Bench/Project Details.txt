@@ -1,5 +1,0 @@
-Project: Thrust Chamber Test Bench
-
-Summary:
-
-Automated test bench for testing high capacity thrust chambers for horizontal pump systems.
