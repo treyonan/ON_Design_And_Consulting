@@ -35,6 +35,7 @@
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
   box-shadow: var(--shadow-md);
+  scroll-margin-top: 100px;
 }
 
 .serviceContent {

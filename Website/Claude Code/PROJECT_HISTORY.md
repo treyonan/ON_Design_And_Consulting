@@ -1210,10 +1210,160 @@ When ready to level up:
 
 ---
 
+## Session 2: Content Customization (January 24, 2026)
+
+**Status:** In Progress - Real content being added progressively
+
+### Work Completed This Session
+
+#### 1. Company Logo Added
+- Source: `Content/Company Logo/ON Design && Consulting_Logo.JPG`
+- Copied to: `public/logo.jpg`
+- Updated `components/Header.js` to reference `logo.jpg`
+- Sized to 70px desktop, 55px mobile
+- Note: SVG format recommended for future (supports transparency, scales without quality loss). JPG works for now.
+
+#### 2. Three Real Projects Added to Portfolio
+
+All projects follow the established content management workflow:
+- Content source in `Content/Projects/[Project Name]/`
+- Images served from `public/projects/[project-slug]/`
+- Project data in `pages/projects.js`
+
+**Project 1: Hydro-Static Tester**
+- Category: OEM Design | Sector: Manufacturing
+- Description: Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.
+- Main image + 6 detail images (Control Panel, Fixtures, HMI, SMC Manifold, Valving)
+- Source: `Content/Projects/001-24-001_Hydro-Static Tester/`
+
+**Project 2: Thrust Chamber Test Bench**
+- Category: OEM Design | Sector: Manufacturing | Sub-Sector: Oil & Gas
+- Description: Automated test bench for testing high capacity thrust chambers for horizontal pump systems.
+- Main image + 3 detail images (HMI, Tester ISO, Tester Section)
+- Source: `Content/Projects/Thrust Chamber Test Bench/`
+
+**Project 3: Valve Assembly Machine**
+- Category: OEM Design | Sector: Manufacturing | Sub-Sector: Oil & Gas
+- Description: Semi-automated machine to assemble flanged ball valves (seat install, pick/place, hole alignment, torque, stencil).
+- Main image + 1 detail video (Torque_001.mov)
+- Source: `Content/Projects/Valve Assembly Machine/`
+
+#### 3. Project Detail Modal with Gallery
+- "View Details" button on each project card opens a modal
+- Modal displays: title, full description, technologies, image/video gallery
+- Gallery supports both images and videos via `type: 'video'` property
+- Videos render with HTML5 `<video>` element with controls
+- Click outside or X button to close
+
+#### 4. UI/Layout Fixes
+- **Image display**: Changed `object-fit: cover` to `object-fit: contain` so full images are visible without cropping
+- **Category badge**: Moved from overlaid on image to inline label below title (cleaner look)
+- **Service anchor links**: Home page service cards now link to specific sections on /services using `#oem-design`, `#plc-programming`, `#consulting` anchors
+- **Smooth scrolling**: Added `scroll-behavior: smooth` to html and `scroll-margin-top: 100px` to service blocks (accounts for sticky header)
+
+#### 5. Content Management System Established
+
+**Directory Structure Convention:**
+```
+Content/Projects/[Project Name]/
+├── Project Details.txt    # Metadata (title, type, sector, sub-sector, summary)
+├── Pictures/
+│   ├── Main.jpg           # Required - card thumbnail
+│   └── [detail images]    # Optional - modal gallery
+└── Videos/                # Optional - modal gallery
+    └── [video files]
+```
+
+**Project Details.txt Format:**
+```
+Project title: [name]
+Type: [OEM Design | PLC Programming | Consulting]
+Sector: [broad industry]
+Sub-Sector: [specific niche, optional]
+Summary: [description]
+```
+
+**Key Conventions:**
+- Flat directory structure (no client grouping)
+- Main.jpg is always the primary image
+- Folder names can include job number prefix (display title comes from Project Details.txt)
+- Sector/Sub-Sector classification (Sub-Sector displayed when available, falls back to Sector)
+
+#### 6. Gitignore Review
+- Root `.gitignore` reviewed and confirmed comprehensive
+- Covers: env files, secrets/credentials/keys, SSH/TLS certs, cloud credentials, data files, logs, databases, OS junk, IDE files, node/build artifacts, temp files
+- Website `.gitignore` is standard Next.js (complemented by root-level patterns)
+- Recommendation noted: Consider whether `Content/` directory should be pushed (contains client project photos)
+- Minor gaps identified (`.npmrc`, `.sql`, `.htpasswd`, Docker secrets, Terraform state) - user deferred adding these
+
+### Key Files Modified This Session
+
+| File | Changes |
+|------|---------|
+| `components/Header.js` | Logo image src and alt text |
+| `styles/Header.module.css` | Logo sizing (70px/55px) |
+| `pages/projects.js` | 3 real projects, detail modal, video support, sector/subSector fields |
+| `styles/Projects.module.css` | Modal, gallery, video styles, object-fit: contain, category label |
+| `pages/index.js` | Service card anchor links (#oem-design, etc.) |
+| `pages/services.js` | Added id attributes to service blocks, scroll-margin-top |
+| `styles/Services.module.css` | scroll-margin-top: 100px on .serviceBlock |
+| `styles/globals.css` | scroll-behavior: smooth on html |
+| `README.md` | Content Management section, project structure, conventions, checklist updates |
+
+### Current State of projects.js
+
+The `projects` array has 3 real projects (ids 1-3) and 4 remaining placeholders (ids 4-7). Each real project uses:
+```javascript
+{
+  id: [number],
+  title: '[from Project Details.txt]',
+  category: '[Type from Project Details.txt]',
+  sector: '[Sector]',
+  subSector: '[Sub-Sector or empty string]',
+  description: '[Summary]',
+  image: '/projects/[slug]/Main.jpg',
+  technologies: ['...'],
+  detailImages: [
+    { src: '/projects/[slug]/[file]', label: '[description]' },
+    { src: '/projects/[slug]/[video].mov', label: '[description]', type: 'video' },
+  ],
+}
+```
+
+### Remaining Work (Not Started)
+
+**High Priority:**
+- [ ] Update contact info in Footer.js and Contact page
+- [ ] Replace company story in About page
+- [ ] Update service descriptions in Services page
+- [ ] Add more real projects (replace placeholders 4-7)
+
+**Medium Priority:**
+- [ ] Adjust color scheme if needed
+- [ ] Update page meta descriptions for SEO
+- [ ] Convert logo to SVG format
+
+**Low Priority:**
+- [ ] Add favicon
+- [ ] Fine-tune spacing/layout
+- [ ] Add social media links
+- [ ] Add email integration to contact form
+
+### Important Notes for Next Session
+
+1. **Content directory is untracked** - `Website/Content/` shows as `??` in git status. Decide whether to commit (private repo) or gitignore (public repo with proprietary client photos).
+2. **4 placeholder projects remain** - ids 4-7 in `pages/projects.js` still have placeholder data and stock images.
+3. **Video support works** - Add `type: 'video'` to detailImages entries for .mov files. HTML5 video with controls.
+4. **Adding new projects workflow**: Create content in `Content/Projects/`, copy media to `public/projects/[slug]/`, add entry to projects array in `pages/projects.js`.
+5. **Logo is JPG** - Works but SVG recommended for better quality. User will convert later.
+6. **Services page has anchor IDs** - `#oem-design`, `#plc-programming`, `#consulting` for deep linking from home page.
+
+---
+
 **End of Project History Document**
 
 *This document serves as complete context for future conversations about this project. User can reference specific sections when asking questions or resume work with full context preserved.*
 
-**Last Updated:** January 11, 2026
-**Status:** ✅ Complete and ready for customization
-**Next Action:** User will customize content following CUSTOMIZATION.md guide
+**Last Updated:** January 24, 2026
+**Status:** In Progress - Content customization underway
+**Next Action:** Continue adding real content (projects, about page, contact info)

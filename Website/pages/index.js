@@ -53,7 +53,7 @@ export default function Home() {
                 Custom equipment design solutions tailored to your manufacturing
                 processes, from concept to production.
               </p>
-              <Link href="/services" className={styles.serviceLink}>
+              <Link href="/services#oem-design" className={styles.serviceLink}>
                 Learn more →
               </Link>
             </div>
@@ -66,7 +66,7 @@ export default function Home() {
                 Expert programming services for industrial control systems,
                 ensuring reliable and efficient automation.
               </p>
-              <Link href="/services" className={styles.serviceLink}>
+              <Link href="/services#plc-programming" className={styles.serviceLink}>
                 Learn more →
               </Link>
             </div>
@@ -79,7 +79,7 @@ export default function Home() {
                 Strategic consulting to optimize your manufacturing operations
                 and improve production efficiency.
               </p>
-              <Link href="/services" className={styles.serviceLink}>
+              <Link href="/services#consulting" className={styles.serviceLink}>
                 Learn more →
               </Link>
             </div>

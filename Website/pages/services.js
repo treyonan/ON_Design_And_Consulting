@@ -25,7 +25,7 @@ export default function Services() {
       <section className={styles.mainServices}>
         <div className="container">
           {/* Service 1: OEM Equipment Design */}
-          <div className={styles.serviceBlock}>
+          <div id="oem-design" className={styles.serviceBlock}>
             <div className={styles.serviceContent}>
               <div className={styles.serviceIcon}>⚙️</div>
               <h2>OEM Equipment Design</h2>
@@ -56,7 +56,7 @@ export default function Services() {
           </div>
 
           {/* Service 2: PLC/HMI/SCADA Programming */}
-          <div className={styles.serviceBlock}>
+          <div id="plc-programming" className={styles.serviceBlock}>
             <div className={styles.serviceContent}>
               <div className={styles.serviceIcon}>💻</div>
               <h2>PLC/HMI/SCADA Programming</h2>
@@ -94,7 +94,7 @@ export default function Services() {
           </div>
 
           {/* Service 3: Manufacturing Consulting */}
-          <div className={styles.serviceBlock}>
+          <div id="consulting" className={styles.serviceBlock}>
             <div className={styles.serviceContent}>
               <div className={styles.serviceIcon}>🔧</div>
               <h2>Manufacturing Consulting</h2>
