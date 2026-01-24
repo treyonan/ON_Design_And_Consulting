@@ -177,48 +177,7 @@
   background-color: var(--primary-blue-dark);
 }
 
-/* Modal Overlay */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-md);
-}
-
-.modalContent {
-  background: var(--background-white);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.modalClose {
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-md);
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--text-secondary);
-  line-height: 1;
-}
-
-.modalClose:hover {
-  color: var(--text-primary);
-}
-
+/* Modal Content (used inside reusable Modal component) */
 .modalTitle {
   font-size: 1.75rem;
   margin-bottom: var(--spacing-xs);
@@ -241,6 +200,13 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.galleryItem:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 .galleryItem img {
@@ -331,10 +297,6 @@
 
   .projectTitle {
     font-size: 1.25rem;
-  }
-
-  .modalContent {
-    padding: var(--spacing-md);
   }
 
   .modalTitle {

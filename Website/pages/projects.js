@@ -6,6 +6,8 @@
 
 import { useState } from 'react';
 import Layout from '../components/Layout';
+import Modal from '../components/Modal';
+import MediaViewer from '../components/MediaViewer';
 import styles from '../styles/Projects.module.css';
 
 export default function Projects() {
@@ -18,6 +20,7 @@ export default function Projects() {
   */
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [viewingMedia, setViewingMedia] = useState(null);
 
   const projects = [
     {
@@ -66,19 +69,21 @@ export default function Projects() {
       image: '/projects/valve-assembly-machine/Main.jpg',
       technologies: ['Automated Assembly', 'Torque Systems', 'Pick & Place'],
       detailImages: [
+        { src: '/projects/valve-assembly-machine/Valve_Assembly_001.jpg', label: 'Valve Assembly' },
+        { src: '/projects/valve-assembly-machine/Valve_Production_Layout_001.jpg', label: 'Production Layout Concept' },
         { src: '/projects/valve-assembly-machine/Torque_001.mov', label: 'Automated Torqueing', type: 'video' },
       ],
     },
     {
       id: 4,
-      title: 'Packaging Line Optimization',
-      category: 'Consulting',
+      title: 'Rotary Valve Tester',
+      category: 'OEM Design',
       sector: 'Manufacturing',
-      subSector: 'Packaging',
+      subSector: 'Oil & Gas',
       description:
-        'Process analysis and optimization resulting in 25% increase in OEE and significant reduction in material waste.',
-      image: '/projects/project-placeholder-3.jpg',
-      technologies: ['Process Analysis', 'OEE Improvement', 'Training'],
+        'Automated hydro-static testing for ball valves.',
+      image: '/projects/rotary-valve-tester/Main.JPG',
+      technologies: ['Hydro-Static Testing', 'Automated Testing', 'PLC Controls'],
     },
     {
       id: 5,
@@ -240,19 +245,20 @@ export default function Projects() {
       </section>
 
       {/* Project Detail Modal */}
-      {selectedProject && (
-        <div className={styles.modalOverlay} onClick={() => setSelectedProject(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setSelectedProject(null)}>
-              &times;
-            </button>
+      <Modal isOpen={!!selectedProject} onClose={() => setSelectedProject(null)}>
+        {selectedProject && (
+          <>
             <h2 className={styles.modalTitle}>{selectedProject.title}</h2>
             <p className={styles.modalDescription}>{selectedProject.description}</p>
             <div className={styles.modalGallery}>
               {selectedProject.detailImages.map((img, index) => (
-                <div key={index} className={styles.galleryItem}>
+                <div
+                  key={index}
+                  className={styles.galleryItem}
+                  onClick={() => setViewingMedia(img)}
+                >
                   {img.type === 'video' ? (
-                    <video controls className={styles.galleryVideo}>
+                    <video className={styles.galleryVideo}>
                       <source src={img.src} />
                     </video>
                   ) : (
@@ -262,9 +268,12 @@ export default function Projects() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </Modal>
+
+      {/* Media Viewer (Lightbox) */}
+      <MediaViewer media={viewingMedia} onClose={() => setViewingMedia(null)} />
     </Layout>
   );
 }

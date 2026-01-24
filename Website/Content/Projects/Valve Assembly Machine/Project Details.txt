@@ -15,4 +15,13 @@ Semi-automated machine to assemble flanged ball valves
 - Automated torqueing
 - Automated stenciling
 
+Pictures:
+
+Main.jpg
+
+Valve_Assembly_001.jpg
+
+Valve_Production_Layout_001.jpg
+- Conceptual layout for automated assembly/test/paint for flanged ball valves
+
 

@@ -1,0 +1,18 @@
+Project title: Rotary Valve Tester
+
+Type: OEM Design
+
+Sector: Manufacturing
+
+Sub-Sector: Oil & Gas
+
+Summary:
+
+Automated hydro-static testing for ball valves
+
+Pictures:
+
+Main.jpg
+
+
+

@@ -1,0 +1,82 @@
+/* ===================================
+   MEDIA VIEWER STYLES (Lightbox)
+   Fullscreen overlay for viewing images/videos at full size.
+   =================================== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--spacing-lg);
+}
+
+.closeButton {
+  position: fixed;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: white;
+  line-height: 1;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s;
+  z-index: 2001;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.mediaContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+
+.media {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.caption {
+  margin-top: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .overlay {
+    padding: var(--spacing-sm);
+  }
+
+  .mediaContainer {
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+
+  .media {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+
+  .closeButton {
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+  }
+}
