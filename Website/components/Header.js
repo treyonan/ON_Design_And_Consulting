@@ -14,14 +14,9 @@ export default function Header() {
         {/* Logo Section - Left side */}
         <div className={styles.logo}>
           <Link href="/">
-            {/*
-              TODO: Replace /logo-placeholder.svg with your actual logo
-              - Save your logo SVG as: /public/logo.svg
-              - Then change src to: /logo.svg
-            */}
             <img
-              src="/logo-placeholder.svg"
-              alt="ON Design LLC Logo"
+              src="/logo.jpg"
+              alt="ON Design & Consulting Logo"
               className={styles.logoImage}
             />
           </Link>

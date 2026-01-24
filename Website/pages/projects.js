@@ -17,35 +17,41 @@ export default function Projects() {
     - Changing this state triggers re-render (page updates)
   */
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  /*
-    PROJECT DATA:
-    - Array of objects, each representing a project
-    - In production, this could come from a CMS or database
-    - For now, it's hardcoded placeholder data
-
-    TODO: Replace with YOUR actual projects
-  */
   const projects = [
     {
       id: 1,
-      title: 'Automated Assembly Line Redesign',
+      title: 'Hydro-Static Tester',
       category: 'OEM Design',
-      industry: 'Automotive',
+      industry: 'Manufacturing',
       description:
-        'Complete redesign of automotive component assembly line, increasing throughput by 35% while reducing downtime.',
-      image: '/projects/project-placeholder-1.jpg', // TODO: Replace with actual images
-      technologies: ['SolidWorks', 'AutoCAD', 'Custom Fixturing'],
+        'Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.',
+      image: '/projects/hydro-static-tester/Machine_001.jpg',
+      technologies: ['UR Cobot', 'Hydro-Static Testing', 'PLC Controls'],
+      detailImages: [
+        { src: '/projects/hydro-static-tester/Control_Panel_001.jpg', label: 'Control Panel' },
+        { src: '/projects/hydro-static-tester/Fixture_001.jpg', label: 'Fixture' },
+        { src: '/projects/hydro-static-tester/Fixture_002.jpg', label: 'Fixture' },
+        { src: '/projects/hydro-static-tester/HMI_001.jpg', label: 'HMI' },
+        { src: '/projects/hydro-static-tester/SMC_Manifold_001.jpg', label: 'SMC Manifold' },
+        { src: '/projects/hydro-static-tester/Valveing_001.jpg', label: 'Valving' },
+      ],
     },
     {
       id: 2,
-      title: 'PLC Control System Upgrade',
-      category: 'PLC Programming',
-      industry: 'Food & Beverage',
+      title: 'Thrust Chamber Test Bench',
+      category: 'OEM Design',
+      industry: 'Oil & Gas',
       description:
-        'Migration from legacy relay logic to modern Allen-Bradley ControlLogix platform with integrated HMI.',
-      image: '/projects/project-placeholder-2.jpg',
-      technologies: ['Allen-Bradley Logix', 'FactoryTalk View', 'EtherNet/IP'],
+        'Automated test bench for testing high capacity thrust chambers for horizontal pump systems.',
+      image: '/projects/thrust-chamber-test-bench/Main.jpg',
+      technologies: ['Test Bench Design', 'Automated Testing', 'High Capacity Pumps'],
+      detailImages: [
+        { src: '/projects/thrust-chamber-test-bench/HMI_001.jpg', label: 'HMI' },
+        { src: '/projects/thrust-chamber-test-bench/Tester_ISO_001.jpg', label: 'Tester ISO View' },
+        { src: '/projects/thrust-chamber-test-bench/Tester_Section_001.jpg', label: 'Tester Section View' },
+      ],
     },
     {
       id: 3,
@@ -170,12 +176,12 @@ export default function Projects() {
                 {/* Project Image */}
                 <div className={styles.projectImage}>
                   <img src={project.image} alt={project.title} />
-                  <div className={styles.projectCategory}>{project.category}</div>
                 </div>
 
                 {/* Project Content */}
                 <div className={styles.projectContent}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <span className={styles.projectCategory}>{project.category}</span>
                   <p className={styles.projectIndustry}>{project.industry}</p>
                   <p className={styles.projectDescription}>{project.description}</p>
 
@@ -187,6 +193,16 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
+
+                  {/* Details Button - only shows if project has detail images */}
+                  {project.detailImages && (
+                    <button
+                      className={styles.detailsButton}
+                      onClick={() => setSelectedProject(project)}
+                    >
+                      View Details
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -200,6 +216,27 @@ export default function Projects() {
           )}
         </div>
       </section>
+
+      {/* Project Detail Modal */}
+      {selectedProject && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedProject(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={() => setSelectedProject(null)}>
+              &times;
+            </button>
+            <h2 className={styles.modalTitle}>{selectedProject.title}</h2>
+            <p className={styles.modalDescription}>{selectedProject.description}</p>
+            <div className={styles.modalGallery}>
+              {selectedProject.detailImages.map((img, index) => (
+                <div key={index} className={styles.galleryItem}>
+                  <img src={img.src} alt={img.label} />
+                  <span className={styles.galleryLabel}>{img.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

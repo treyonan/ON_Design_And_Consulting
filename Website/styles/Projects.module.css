@@ -98,7 +98,7 @@
 .projectImage img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fills container while maintaining aspect ratio */
+  object-fit: contain; /* Shows full image within container */
   transition: transform 0.3s ease;
 }
 
@@ -106,17 +106,16 @@
   transform: scale(1.05); /* Slight zoom on hover */
 }
 
-/* Category Badge on Image */
+/* Category Label (under title) */
 .projectCategory {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  background-color: var(--primary-blue);
-  color: white;
-  padding: 0.5rem 1rem;
+  display: inline-block;
+  background-color: var(--gray-100);
+  color: var(--primary-blue);
+  padding: 0.25rem 0.75rem;
   border-radius: var(--radius-sm);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  margin-bottom: var(--spacing-sm);
 }
 
 /* Project Content */
@@ -160,6 +159,107 @@
   font-weight: 500;
 }
 
+/* Details Button */
+.detailsButton {
+  margin-top: var(--spacing-md);
+  padding: 0.6rem 1.25rem;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.detailsButton:hover {
+  background-color: var(--primary-blue-dark);
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+.modalContent {
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.modalClose:hover {
+  color: var(--text-primary);
+}
+
+.modalTitle {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+}
+
+.modalDescription {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.modalGallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.galleryItem {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: var(--gray-100);
+  display: block;
+}
+
+.galleryLabel {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--gray-50);
+}
+
 /* No Results Message */
 .noResults {
   text-align: center;
@@ -180,6 +280,10 @@
 
   .pageHeader h1 {
     font-size: 2.5rem;
+  }
+
+  .modalGallery {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -220,6 +324,14 @@
 
   .projectTitle {
     font-size: 1.25rem;
+  }
+
+  .modalContent {
+    padding: var(--spacing-md);
+  }
+
+  .modalTitle {
+    font-size: 1.35rem;
   }
 }
 

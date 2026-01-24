@@ -29,7 +29,7 @@
 }
 
 .logoImage {
-  height: 50px;
+  height: 70px;
   width: auto;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -92,7 +92,7 @@
   }
 
   .logoImage {
-    height: 40px; /* Smaller logo on mobile */
+    height: 55px; /* Smaller logo on mobile */
   }
 
   .nav {
