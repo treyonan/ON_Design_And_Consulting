@@ -22,13 +22,19 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [viewingMedia, setViewingMedia] = useState(null);
 
+  /*
+    PROJECT DATA STRUCTURE:
+    - type: Equipment category (Testing Equipment, Assembly Equipment, etc.)
+    - sector: Industry sector (Oil & Gas, Automotive, etc.)
+    - Filter buttons use 'type' field
+    - Cards display both type and sector
+  */
   const projects = [
     {
       id: 1,
       title: 'Hydro-Static Tester',
-      category: 'OEM Design',
-      sector: 'Manufacturing',
-      subSector: '',
+      type: 'Testing Equipment',
+      sector: 'Oil & Gas',
       description:
         'Fully automated machine to hydro statically test castings. Automated part loading using a UR cobot.',
       image: '/projects/hydro-static-tester/Main.jpg',
@@ -45,9 +51,8 @@ export default function Projects() {
     {
       id: 2,
       title: 'Thrust Chamber Test Bench',
-      category: 'OEM Design',
-      sector: 'Manufacturing',
-      subSector: 'Oil & Gas',
+      type: 'Testing Equipment',
+      sector: 'Oil & Gas',
       description:
         'Automated test bench for testing high capacity thrust chambers for horizontal pump systems.',
       image: '/projects/thrust-chamber-test-bench/Main.jpg',
@@ -61,9 +66,8 @@ export default function Projects() {
     {
       id: 3,
       title: 'Valve Assembly Machine',
-      category: 'OEM Design',
-      sector: 'Manufacturing',
-      subSector: 'Oil & Gas',
+      type: 'Assembly Equipment',
+      sector: 'Oil & Gas',
       description:
         'Semi-automated machine to assemble flanged ball valves. Features automated seat installation, pick and placement of tail and body sections, two hole alignment check, automated torqueing, and automated stenciling.',
       image: '/projects/valve-assembly-machine/Main.jpg',
@@ -77,70 +81,42 @@ export default function Projects() {
     {
       id: 4,
       title: 'Rotary Valve Tester',
-      category: 'OEM Design',
-      sector: 'Manufacturing',
-      subSector: 'Oil & Gas',
+      type: 'Testing Equipment',
+      sector: 'Oil & Gas',
       description:
         'Automated hydro-static testing for ball valves.',
       image: '/projects/rotary-valve-tester/Main.JPG',
       technologies: ['Hydro-Static Testing', 'Automated Testing', 'PLC Controls'],
     },
-    {
-      id: 5,
-      title: 'Custom Material Handling System',
-      category: 'OEM Design',
-      sector: 'Manufacturing',
-      subSector: 'Material Handling',
-      description:
-        'Design and fabrication of automated guided vehicle (AGV) system for warehouse material transport.',
-      image: '/projects/project-placeholder-4.jpg',
-      technologies: ['Conveyor Design', 'AGV Integration', 'Safety Systems'],
-    },
-    {
-      id: 6,
-      title: 'SCADA System Implementation',
-      category: 'PLC Programming',
-      sector: 'Manufacturing',
-      subSector: 'Pharmaceutical',
-      description:
-        'Enterprise-level SCADA system for multi-site monitoring and data collection with 21 CFR Part 11 compliance.',
-      image: '/projects/project-placeholder-5.jpg',
-      technologies: ['Ignition SCADA', 'SQL Database', 'FDA Compliance'],
-    },
-    {
-      id: 7,
-      title: 'Plant-Wide Equipment Audit',
-      category: 'Consulting',
-      sector: 'Manufacturing',
-      subSector: 'Automotive',
-      description:
-        'Comprehensive audit of 50+ production machines with upgrade roadmap and ROI analysis for modernization.',
-      image: '/projects/project-placeholder-6.jpg',
-      technologies: ['Equipment Assessment', 'ROI Analysis', 'Strategic Planning'],
-    },
   ];
 
   /*
-    FILTER LOGIC:
-    - Get unique categories from projects
-    - Add 'All' as first option
-    - Creates array: ['All', 'OEM Design', 'PLC Programming', 'Consulting']
+    FILTER TYPES:
+    - Fixed list of project types (not dynamically generated)
+    - Includes PLC Programming and Consulting for future projects
+    - OEM Design types: Testing Equipment, Assembly Equipment, etc.
   */
-  const categories = ['All', ...new Set(projects.map((p) => p.category))];
+  const filterTypes = [
+    'All',
+    'Testing Equipment',
+    'Assembly Equipment',
+    'PLC Programming',
+    'Consulting',
+  ];
 
   /*
     FILTERED PROJECTS:
     - If activeFilter is 'All', show all projects
-    - Otherwise, only show projects matching the active category
+    - Otherwise, only show projects matching the active type
     - This runs every time activeFilter changes (reactive)
   */
   const filteredProjects =
     activeFilter === 'All'
       ? projects
-      : projects.filter((project) => project.category === activeFilter);
+      : projects.filter((project) => project.type === activeFilter);
 
   return (
-    <Layout title="Projects" description="Explore ON Design LLC's portfolio of successful OEM design, PLC programming, and consulting projects">
+    <Layout title="Projects" description="Explore ON Design LLC's portfolio of custom equipment design projects including testing equipment, assembly machines, and automation solutions">
       {/* Page Header */}
       <section className={styles.pageHeader}>
         <div className="container">
@@ -161,25 +137,15 @@ export default function Projects() {
               - Creates a button for each category
               - 'category' is the current item in the loop
             */}
-            {categories.map((category) => (
+            {filterTypes.map((type) => (
               <button
-                key={category} // Unique key required by React for list items
-                /*
-                  CONDITIONAL CLASSNAME:
-                  - If this button's category matches activeFilter, add 'active' class
-                  - Active class makes button look selected (different color)
-                */
+                key={type}
                 className={`${styles.filterButton} ${
-                  activeFilter === category ? styles.active : ''
+                  activeFilter === type ? styles.active : ''
                 }`}
-                /*
-                  ONCLICK HANDLER:
-                  - When button clicked, update activeFilter state
-                  - This triggers re-render with new filtered projects
-                */
-                onClick={() => setActiveFilter(category)}
+                onClick={() => setActiveFilter(type)}
               >
-                {category}
+                {type}
               </button>
             ))}
           </div>
@@ -206,10 +172,8 @@ export default function Projects() {
                 {/* Project Content */}
                 <div className={styles.projectContent}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>
-                  <span className={styles.projectCategory}>{project.category}</span>
-                  <p className={styles.projectIndustry}>
-                    {project.subSector || project.sector}
-                  </p>
+                  <span className={styles.projectCategory}>{project.type}</span>
+                  <p className={styles.projectIndustry}>{project.sector}</p>
                   <p className={styles.projectDescription}>{project.description}</p>
 
                   {/* Technologies Used */}
@@ -299,7 +263,7 @@ export default function Projects() {
      - Used for "no results" message
 
   4. FILTER FUNCTION:
-     projects.filter((p) => p.category === activeFilter)
+     projects.filter((p) => p.type === activeFilter)
      - Creates new array with only matching items
      - Non-destructive (original array unchanged)
 

@@ -1,10 +1,8 @@
 Project title: Hydro-Static Tester
 
-Type: OEM Design
+Type: Testing Equipment
 
-Sector: Manufacturing
-
-Sub-Sector: 
+Sector: Oil & Gas
 
 Summary:
 

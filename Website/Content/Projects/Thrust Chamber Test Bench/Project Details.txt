@@ -1,10 +1,8 @@
 Project title: Thrust Chamber Test Bench
 
-Type: OEM Design
+Type: Testing Equipment
 
-Sector: Manufacturing
-
-Sub-Sector: Oil & Gas
+Sector: Oil & Gas
 
 Summary:
 

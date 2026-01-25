@@ -1,10 +1,8 @@
 Project title: Rotary Valve Tester
 
-Type: OEM Design
+Type: Testing Equipment
 
-Sector: Manufacturing
-
-Sub-Sector: Oil & Gas
+Sector: Oil & Gas
 
 Summary:
 
