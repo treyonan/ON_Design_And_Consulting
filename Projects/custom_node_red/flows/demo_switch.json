@@ -1,0 +1,148 @@
+{
+  "nodes": [
+    {
+      "id": "inject-score",
+      "pos": [50, 250],
+      "data": {"content": "**Inject**\n\n`75`"},
+      "node_type": "input",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#a6bbcf",
+        "border": "2px solid #555",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "switch-check",
+      "pos": [280, 250],
+      "data": {"content": "**Switch**\n\n`payload > 50`"},
+      "node_type": "default",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#fdd0a2",
+        "border": "2px solid #555",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "tmpl-pass",
+      "pos": [530, 100],
+      "data": {"content": "**Template**\n\n`PASS`"},
+      "node_type": "default",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#fdd0a2",
+        "border": "2px solid #4caf50",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "tmpl-fail",
+      "pos": [530, 400],
+      "data": {"content": "**Template**\n\n`FAIL`"},
+      "node_type": "default",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#fdd0a2",
+        "border": "2px solid #f44336",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "debug-pass",
+      "pos": [790, 100],
+      "data": {"content": "**Debug**\n\n`PASS`"},
+      "node_type": "output",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#c8e6c9",
+        "border": "2px solid #4caf50",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "debug-fail",
+      "pos": [790, 400],
+      "data": {"content": "**Debug**\n\n`FAIL`"},
+      "node_type": "output",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#c8e6c9",
+        "border": "2px solid #f44336",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    }
+  ],
+  "edges": [
+    {"id": "e-inject-switch", "source": "inject-score", "target": "switch-check"},
+    {"id": "e-switch-pass", "source": "switch-check", "target": "tmpl-pass"},
+    {"id": "e-switch-fail", "source": "switch-check", "target": "tmpl-fail"},
+    {"id": "e-tmpl-dbg-pass", "source": "tmpl-pass", "target": "debug-pass"},
+    {"id": "e-tmpl-dbg-fail", "source": "tmpl-fail", "target": "debug-fail"}
+  ],
+  "configs": {
+    "inject-score": {
+      "_type": "Inject",
+      "payload": "75",
+      "payload_type": "number"
+    },
+    "switch-check": {
+      "_type": "Switch",
+      "property": "payload",
+      "condition": ">",
+      "value": "50"
+    },
+    "tmpl-pass": {
+      "_type": "Template",
+      "template": "PASS: Score {{payload}} is above the threshold of 50"
+    },
+    "tmpl-fail": {
+      "_type": "Template",
+      "template": "FAIL: Score {{payload}} is at or below the threshold of 50"
+    },
+    "debug-pass": {
+      "_type": "Debug",
+      "display": "payload"
+    },
+    "debug-fail": {
+      "_type": "Debug",
+      "display": "payload"
+    }
+  }
+}

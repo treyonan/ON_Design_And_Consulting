@@ -1,0 +1,77 @@
+{
+  "nodes": [
+    {
+      "id": "inject-1",
+      "pos": [50, 200],
+      "data": {"content": "**Inject**"},
+      "node_type": "input",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#a6bbcf",
+        "border": "2px solid #555",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "func-1",
+      "pos": [300, 200],
+      "data": {"content": "**Function**"},
+      "node_type": "default",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#fdd0a2",
+        "border": "2px solid #555",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    },
+    {
+      "id": "debug-1",
+      "pos": [570, 200],
+      "data": {"content": "**Debug**"},
+      "node_type": "output",
+      "source_position": "right",
+      "target_position": "left",
+      "style": {
+        "background": "#c8e6c9",
+        "border": "2px solid #555",
+        "borderRadius": "8px",
+        "padding": "8px 14px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minWidth": "100px",
+        "textAlign": "center"
+      }
+    }
+  ],
+  "edges": [
+    {"id": "inject-1__func-1", "source": "inject-1", "target": "func-1"},
+    {"id": "func-1__debug-1", "source": "func-1", "target": "debug-1"}
+  ],
+  "configs": {
+    "inject-1": {
+      "_type": "Inject",
+      "payload": "7",
+      "payload_type": "number"
+    },
+    "func-1": {
+      "_type": "Function",
+      "code": "x = msg['payload']\nmsg['payload'] = {\n    'input': x,\n    'squared': x ** 2,\n    'cubed': x ** 3,\n    'factorial_approx': round(x * (x - 1) * (x - 2), 2),\n    'formula': round((x ** 2 + 3 * x - 10) / 2, 2)\n}\nreturn msg"
+    },
+    "debug-1": {
+      "_type": "Debug",
+      "display": "full_message"
+    }
+  }
+}
