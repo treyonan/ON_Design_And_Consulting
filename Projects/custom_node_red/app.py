@@ -4,10 +4,17 @@ Run with:  streamlit run app.py
 """
 
 import json
+import logging
 import os
-import streamlit as st
+import warnings
 from uuid import uuid4
 
+# Suppress Streamlit's ScriptRunContext warning before any st imports
+logging.getLogger("streamlit").setLevel(logging.ERROR)
+logging.getLogger("streamlit.runtime.scriptrunner_utils.script_run_context").setLevel(logging.ERROR)
+warnings.filterwarnings("ignore", message=".*ScriptRunContext.*")
+
+import streamlit as st
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 from streamlit_flow.state import StreamlitFlowState
